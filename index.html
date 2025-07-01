@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatScribe 📜✨ | دوّن محادثاتك ببراعة</title>
+    
+    <!-- Favicon - أيقونة المشروع -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📜</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- General Styling & Variables --- */
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-text: #e0e0e0;
+            --secondary-text: #a0a0a0;
+            --accent-color: #D4AF37; /* Gold */
+            --glow-color: rgba(212, 175, 55, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        /* --- Animation on Load --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Header Section --- */
+        .header {
+            padding: 80px 0;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+
+        .header h1 .icon {
+            font-size: 3rem;
+            vertical-align: middle;
+        }
+
+        .header .subtitle {
+            font-size: 1.25rem;
+            color: var(--secondary-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Main Button --- */
+        .main-cta {
+            margin-top: 40px;
+            animation: fadeInUp 1s ease-out 0.2s;
+            animation-fill-mode: backwards; /* Keeps it invisible until animation starts */
+        }
+        
+        .btn-glow {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 15px 35px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50px;
+            background-color: transparent;
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        
+        .btn-glow:hover {
+            color: var(--bg-color);
+            background-color: var(--accent-color);
+            box-shadow: 0 0 25px var(--glow-color), 0 0 50px var(--glow-color);
+            transform: translateY(-5px);
+        }
+
+        /* --- How It Works Section --- */
+        .how-it-works {
+            padding: 60px 0;
+            animation: fadeInUp 1s ease-out 0.4s;
+            animation-fill-mode: backwards;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .step {
+            background-color: var(--surface-color);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .step .step-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        
+        .step h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: var(--secondary-text);
+            font-size: 0.95rem;
+        }
+
+        /* --- Code Snippet Section --- */
+        .code-section {
+            padding: 60px 0;
+            animation: fadeInUp 1s ease-out 0.6s;
+            animation-fill-mode: backwards;
+        }
+        
+        .code-container {
+            background-color: #0d0d0d;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: left;
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .code-header span {
+            font-family: monospace;
+            color: var(--secondary-text);
+        }
+        
+        .copy-btn {
+            background-color: #2a2a2a;
+            color: var(--primary-text);
+            border: 1px solid #444;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover {
+            background-color: #3a3a3a;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #c5c8c6; /* Monokai text color */
+        }
+        
+        /* --- Footer --- */
+        footer {
+            padding: 30px 0;
+            border-top: 1px solid #2a2a2a;
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 3rem;
+            }
+            .header .subtitle {
+                font-size: 1.1rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1><span class="icon">📜</span> ChatScribe</h1>
+            <p class="subtitle">
+                الكاتب الشخصي الخاص بك لـ ChatGPT. استخرج، نسّق، وحمّل محادثاتك بسهولة كملفات Markdown جميلة باستخدام اسكربت واحد.
+            </p>
+            <div class="main-cta">
+                <a href="https://github.com/seif4d/ChatScribe" target="_blank" class="btn-glow">
+                    عرض على GitHub
+                </a>
+            </div>
+        </header>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works">
+            <h2 class="section-title">كيف يعمل؟</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>افتح الكونسول</h3>
+                    <p>في صفحة محادثة ChatGPT، اضغط `F12` واذهب إلى تبويب Console.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>انسخ وألصق</h3>
+                    <p>انسخ الكود بالكامل من الملف وألصقه في الكونسول.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>حمّل ملفك</h3>
+                    <p>اضغط `Enter` وشاهد ملف Markdown الخاص بك وهو يتحمل فورًا! 🎉</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Snippet Section -->
+        <section class="code-section">
+            <h2 class="section-title">احصل على الكود</h2>
+            <div class="code-container">
+                <div class="code-header">
+                    <span>ChatScribe.js</span>
+                    <button class="copy-btn" id="copyCodeBtn">📋 نسخ</button>
+                </div>
+                <pre id="code-snippet">// Code will be dynamically loaded here</pre>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>صُنع بـ ❤️ بواسطة <a href="https://github.com/seif4d" target="_blank">Seif DebiaN</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const codeSnippetEl = document.getElementById('code-snippet');
+            const copyCodeBtn = document.getElementById('copyCodeBtn');
+
+            const codeToDisplay = `
+(function() {
+    console.log("🚀 Starting conversation export to Markdown...");
+
+    function htmlToMarkdown(node) {
+        let markdownText = '';
+        const childNodes = Array.from(node.childNodes);
+
+        childNodes.forEach((child) => {
+            switch (child.nodeName) {
+                case '#text': markdownText += child.textContent; break;
+                case 'P': markdownText += '\\n' + htmlToMarkdown(child) + '\\n'; break;
+                case 'H2': markdownText += '## ' + htmlToMarkdown(child) + '\\n\\n'; break;
+                case 'UL': markdownText += htmlToMarkdown(child); break;
+                case 'LI': markdownText += '* ' + htmlToMarkdown(child) + '\\n'; break;
+                case 'STRONG': case 'B': markdownText += '**' + htmlToMarkdown(child) + '**'; break;
+                case 'EM': case 'I': markdownText += '*' + htmlToMarkdown(child) + '*'; break;
+                case 'BLOCKQUOTE':
+                    const bq = htmlToMarkdown(child).trim().split('\\n').map(l => '> ' + l).join('\\n');
+                    markdownText += '\\n' + bq + '\\n\\n';
+                    break;
+                case 'PRE':
+                    const lang = child.querySelector('.justify-between')?.innerText.trim() || 'code';
+                    const code = child.querySelector('code')?.innerText || '';
+                    markdownText += '\\n\\\`\\\`\\\`' + lang + '\\n' + code.trim() + '\\n\\\`\\\`\\\`\\n\\n';
+                    break;
+                case 'CODE':
+                    if (child.parentElement.nodeName !== 'PRE') markdownText += '\\\`' + child.textContent + '\\\`';
+                    break;
+                case 'BR': markdownText += '\\n'; break;
+                case 'HR': markdownText += '\\n---\\n\\n'; break;
+                default: markdownText += htmlToMarkdown(child);
+            }
+        });
+        return markdownText;
+    }
+
+    const turns = document.querySelectorAll('[data-testid^="conversation-turn-"]');
+    const markdownLines = [];
+    const chatTitle = document.title || 'ChatGPT-Conversation';
+    markdownLines.push('# 📜 ' + chatTitle + '\\n');
+
+    turns.forEach(turn => {
+        const user = turn.querySelector('div[data-message-author-role="user"] .whitespace-pre-wrap');
+        const assistant = turn.querySelector('div[data-message-author-role="assistant"] .markdown.prose');
+
+        if (user) {
+            markdownLines.push('### 🧑‍💻 المستخدم\\n');
+            markdownLines.push(user.innerText.trim() + '\\n');
+        } else if (assistant) {
+            markdownLines.push('### 🤖 المساعد\\n');
+            markdownLines.push(htmlToMarkdown(assistant).trim() + '\\n');
+        }
+        markdownLines.push('---\\n');
+    });
+
+    if (markdownLines.length <= 2) {
+        console.error("😔 No content found. Are you on a conversation page?");
+        return;
+    }
+
+    const fullMarkdown = markdownLines.join('\\n');
+    const blob = new Blob([fullMarkdown], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const safeTitle = chatTitle.replace(/[^a-z0-9א-ת一-龠]/gi, '-').toLowerCase();
+    const timestamp = new Date().toISOString().slice(0, 10);
+    a.download = safeTitle + '-' + timestamp + '.md';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    console.log('✅🎉 Success! Your file "' + a.download + '" has started downloading.');
+})();
+            `.trim();
+
+            codeSnippetEl.textContent = codeToDisplay;
+
+            copyCodeBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(codeToDisplay).then(() => {
+                    copyCodeBtn.textContent = '✅ تم النسخ!';
+                    setTimeout(() => {
+                        copyCodeBtn.textContent = '📋 نسخ';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
