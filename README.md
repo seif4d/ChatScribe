@@ -1,7 +1,7 @@
 # 📜✨ ChatScribe
 > Your personal scribe for ChatGPT. | الكاتب الشخصي لـ ChatGPT.
 
-[View on GitHub](https://github.com/seif4d/ChatScribe) • [Download JS](https://raw.githubusercontent.com/seif4d/ChatScribe/script.js)
+[View on GitHub](https://github.com/seif4d/ChatScribe) • [Download JS](https://github.com/seif4d/ChatScribe/blob/main/script.js)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/seif4d/ChatScribe/pulls)
